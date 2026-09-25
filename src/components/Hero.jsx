@@ -12,7 +12,10 @@ const Hero = () => {
   const cursorRingRef = useRef(null);
   const contentRef = useRef(null);
 
-  const developerRoles = [resume.basics.title, ...resume.skills.slice(0, 3).map((item) => item.category)];
+  const developerRoles = [
+    resume.basics.title,
+    ...resume.skills.slice(0, 3).map((item) => item.category),
+  ];
 
   const handleResumeDownload = (event) => {
     event.preventDefault();
@@ -33,43 +36,80 @@ const Hero = () => {
     if (!section || !card || !content) return;
 
     // --- GSAP CINEMATIC ENTRANCE ANIMATION ---
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
     tl.fromTo(
       section.querySelector('header'),
       { y: -60, opacity: 0 },
       { y: 0, opacity: 1, duration: 1 }
     )
-    .fromTo(
-      content.querySelectorAll('.hero-anim-item'),
-      { y: 50, opacity: 0, filter: "blur(10px)" },
-      { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.1, stagger: 0.12 },
-      "-=0.7"
-    )
-    .fromTo(
-      card,
-      { scale: 0.75, opacity: 0, rotationY: 35, rotationX: -15 },
-      { scale: 1, opacity: 1, rotationY: 0, rotationX: 0, duration: 1.4, ease: "back.out(1.2)" },
-      "-=0.9"
-    );
+      .fromTo(
+        content.querySelectorAll('.hero-anim-item'),
+        { y: 50, opacity: 0, filter: 'blur(10px)' },
+        {
+          y: 0,
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 1.1,
+          stagger: 0.12,
+        },
+        '-=0.7'
+      )
+      .fromTo(
+        card,
+        { scale: 0.75, opacity: 0, rotationY: 35, rotationX: -15 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotationY: 0,
+          rotationX: 0,
+          duration: 1.4,
+          ease: 'back.out(1.2)',
+        },
+        '-=0.9'
+      );
 
     // --- MOUSE PHYSICS & SPOTLIGHT TRACKING ---
     gsap.set([cursorDotRef.current, cursorRingRef.current], {
       scale: 0.5,
       opacity: 0,
-      transformOrigin: "50% 50%"
+      transformOrigin: '50% 50%',
     });
 
-    const xToDot = gsap.quickTo(cursorDotRef.current, "x", { duration: 0.05, ease: "power2.out" });
-    const yToDot = gsap.quickTo(cursorDotRef.current, "y", { duration: 0.05, ease: "power2.out" });
-    
-    const xToRing = gsap.quickTo(cursorRingRef.current, "x", { duration: 0.15, ease: "power3.out" });
-    const yToRing = gsap.quickTo(cursorRingRef.current, "y", { duration: 0.15, ease: "power3.out" });
+    const xToDot = gsap.quickTo(cursorDotRef.current, 'x', {
+      duration: 0.05,
+      ease: 'power2.out',
+    });
+    const yToDot = gsap.quickTo(cursorDotRef.current, 'y', {
+      duration: 0.05,
+      ease: 'power2.out',
+    });
 
-    const xTilt = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power3.out" });
-    const yTilt = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power3.out" });
-    const glareX = gsap.quickTo(glareRef.current, "x", { duration: 0.3, ease: "power2.out" });
-    const glareY = gsap.quickTo(glareRef.current, "y", { duration: 0.3, ease: "power2.out" });
+    const xToRing = gsap.quickTo(cursorRingRef.current, 'x', {
+      duration: 0.15,
+      ease: 'power3.out',
+    });
+    const yToRing = gsap.quickTo(cursorRingRef.current, 'y', {
+      duration: 0.15,
+      ease: 'power3.out',
+    });
+
+    const xTilt = gsap.quickTo(card, 'rotationY', {
+      duration: 0.4,
+      ease: 'power3.out',
+    });
+    const yTilt = gsap.quickTo(card, 'rotationX', {
+      duration: 0.4,
+      ease: 'power3.out',
+    });
+    const glareX = gsap.quickTo(glareRef.current, 'x', {
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+    const glareY = gsap.quickTo(glareRef.current, 'y', {
+      duration: 0.3,
+      ease: 'power2.out',
+    });
 
     const handleMouseMove = (e) => {
       const rect = section.getBoundingClientRect();
@@ -79,18 +119,15 @@ const Hero = () => {
       const dotSize = 12;
       const ringSize = 48;
 
-      // Update Spotlight position instantly via inline style
       if (spotlightRef.current) {
         spotlightRef.current.style.transform = `translate3d(${x - 300}px, ${y - 300}px, 0)`;
       }
 
-      // Update Custom Cursor coordinates
       xToDot(x - dotSize / 2);
       yToDot(y - dotSize / 2);
       xToRing(x - ringSize / 2);
       yToRing(y - ringSize / 2);
 
-      // Card 3D Perspective Calculations
       const cardRect = card.getBoundingClientRect();
       const cardCenterX = cardRect.left + cardRect.width / 2 - rect.left;
       const cardCenterY = cardRect.top + cardRect.height / 2 - rect.top;
@@ -101,9 +138,8 @@ const Hero = () => {
       xTilt(rotateY);
       yTilt(rotateX);
 
-      // Holographic Glare mapping
-      glareX((x - cardRect.left) - cardRect.width / 2);
-      glareY((y - cardRect.top) - cardRect.height / 2);
+      glareX(x - cardRect.left - cardRect.width / 2);
+      glareY(y - cardRect.top - cardRect.height / 2);
     };
 
     const handleMouseEnter = () => {
@@ -111,9 +147,11 @@ const Hero = () => {
         opacity: 1,
         scale: 1,
         duration: 0.3,
-        ease: "power2.out"
+        ease: 'power2.out',
       });
-      if (spotlightRef.current) gsap.to(spotlightRef.current, { opacity: 1, duration: 0.3 });
+      if (spotlightRef.current) {
+        gsap.to(spotlightRef.current, { opacity: 1, duration: 0.3 });
+      }
     };
 
     const handleMouseLeave = () => {
@@ -121,28 +159,30 @@ const Hero = () => {
         opacity: 0,
         scale: 0.5,
         duration: 0.3,
-        ease: "power2.inOut"
+        ease: 'power2.inOut',
       });
-      if (spotlightRef.current) gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3 });
+      if (spotlightRef.current) {
+        gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3 });
+      }
       xTilt(0);
       yTilt(0);
     };
 
-    section.addEventListener("mousemove", handleMouseMove);
-    section.addEventListener("mouseenter", handleMouseEnter);
-    section.addEventListener("mouseleave", handleMouseLeave);
+    section.addEventListener('mousemove', handleMouseMove);
+    section.addEventListener('mouseenter', handleMouseEnter);
+    section.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      section.removeEventListener("mousemove", handleMouseMove);
-      section.removeEventListener("mouseenter", handleMouseEnter);
-      section.removeEventListener("mouseleave", handleMouseLeave);
+      section.removeEventListener('mousemove', handleMouseMove);
+      section.removeEventListener('mouseenter', handleMouseEnter);
+      section.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen bg-[#050505] overflow-hidden flex flex-col justify-between select-none cursor-none"
+      className="relative w-full min-h-screen bg-[#050505] overflow-hidden flex flex-col justify-between select-none cursor-none"
     >
       <style>{`
         @keyframes marquee {
@@ -161,7 +201,10 @@ const Hero = () => {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-10">
           <div className="flex whitespace-nowrap animate-marquee">
             {[...developerRoles, ...developerRoles].map((role, idx) => (
-              <span key={idx} className="text-[14vw] font-black text-red-600 mx-8 uppercase tracking-tighter">
+              <span
+                key={idx}
+                className="text-[14vw] font-black text-red-600 mx-8 uppercase tracking-tighter"
+              >
                 {role} &bull;
               </span>
             ))}
@@ -169,41 +212,53 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* 2. Direct Mouse Tracking Spotlight Beam (Glows wherever you move) */}
+      {/* 2. Direct Mouse Tracking Spotlight Beam */}
       <div
         ref={spotlightRef}
         className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-10 opacity-0 blur-[90px] transition-opacity duration-300"
         style={{
-          background: 'radial-gradient(circle, rgba(229,9,20,0.35) 0%, rgba(229,9,20,0.1) 40%, transparent 70%)'
+          background:
+            'radial-gradient(circle, rgba(229,9,20,0.35) 0%, rgba(229,9,20,0.1) 40%, transparent 70%)',
         }}
       ></div>
 
       {/* 3. Main Content Layer */}
-      <div ref={contentRef} className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-between pt-24 pb-12">
-        
+      <div
+        ref={contentRef}
+        className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 min-h-screen flex flex-col justify-between gap-8 pt-24 pb-12"
+      >
         {/* Top Netflix Cinematic Badge */}
         <div className="hero-anim-item flex items-center justify-between w-full">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-red-600/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-            <span className="text-red-500 font-bold tracking-wider">NETFLIX DEVELOPER SERIES</span>
+            <span className="text-red-500 font-bold tracking-wider">
+              NETFLIX DEVELOPER SERIES
+            </span>
             <span className="text-white/40">|</span>
             <span className="text-white/80">{careerDates}</span>
           </div>
+
           <div className="hidden md:flex items-center gap-2 text-xs font-mono text-white/50 tracking-wider">
-            <span className="px-2 py-0.5 border border-white/20 rounded bg-black/40">{resume.basics.title}</span>
-            <span className="px-2 py-0.5 border border-white/20 rounded bg-black/40">{resume.certifications[0].split(' – ')[0]}</span>
+            <span className="px-2 py-0.5 border border-white/20 rounded bg-black/40">
+              {resume.basics.title}
+            </span>
+            <span className="px-2 py-0.5 border border-white/20 rounded bg-black/40">
+              {resume.certifications[0].split(' – ')[0]}
+            </span>
           </div>
         </div>
 
         {/* Main Center Cinematic Stage Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 my-auto">
-          
           {/* Left Side: Developer Story & Description */}
           <div className="lg:col-span-5 flex flex-col items-start space-y-5 text-left">
-            
             <div className="hero-anim-item flex items-center gap-3">
-              <span className="px-2.5 py-0.5 bg-red-600 text-white font-black text-xs rounded tracking-widest shadow-[0_0_20px_rgba(229,9,20,0.8)] animate-pulse">{resume.basics.experience}</span>
-              <span className="text-white/80 text-xs font-mono tracking-widest uppercase">{resume.basics.title}</span>
+              <span className="px-2.5 py-0.5 bg-red-600 text-white font-black text-xs rounded tracking-widest shadow-[0_0_20px_rgba(229,9,20,0.8)] animate-pulse">
+                {resume.basics.experience}
+              </span>
+              <span className="text-white/80 text-xs font-mono tracking-widest uppercase">
+                {resume.basics.title}
+              </span>
             </div>
 
             <h1 className="hero-anim-item text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95] drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]">
@@ -214,11 +269,15 @@ const Hero = () => {
             </h1>
 
             <div className="hero-anim-item flex items-center gap-3 text-xs font-mono text-red-400 font-bold">
-              <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/30 rounded text-red-500">{skillItems('Test Automation')[0]}</span>
+              <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/30 rounded text-red-500">
+                {skillItems('Test Automation')[0]}
+              </span>
               <span className="text-white/40">•</span>
               <span>{skillItems('Programming').slice(0, 2).join(' • ')}</span>
               <span className="text-white/40">•</span>
-              <span className="text-white/70">{skillItems('AI / LLM Testing')[0]}</span>
+              <span className="text-white/70">
+                {skillItems('AI / LLM Testing')[0]}
+              </span>
             </div>
 
             <p className="hero-anim-item text-sm md:text-base text-white/80 font-light leading-relaxed max-w-md drop-shadow">
@@ -236,11 +295,15 @@ const Hero = () => {
                 </svg>
                 View Projects
               </a>
+
               <a
                 href="#contact"
                 className="px-8 py-3.5 bg-neutral-900/80 text-white border border-white/20 font-bold text-xs uppercase tracking-widest rounded hover:bg-neutral-800 transition-all duration-300 shadow-xl backdrop-blur-md flex items-center gap-2 hover:scale-105 active:scale-95"
               >
-                <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4 fill-none stroke-current stroke-2"
+                  viewBox="0 0 24 24"
+                >
                   <circle cx="12" cy="12" r="10" />
                   <line x1="12" y1="8" x2="12" y2="12" />
                   <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -252,18 +315,17 @@ const Hero = () => {
 
           {/* Center: Interactive 3D Holographic Tilt Developer Poster Frame */}
           <div className="lg:col-span-4 flex justify-center perspective-[1200px]">
-            <div 
+            <div
               ref={cardRef}
               className="relative group transform-gpu transition-transform duration-100 ease-out will-change-transform"
             >
               {/* Cinematic Red Neon Back Glow */}
               <div className="absolute -inset-3 bg-gradient-to-r from-red-600/70 via-rose-600/40 to-purple-600/20 rounded-3xl blur-3xl opacity-90 group-hover:opacity-100 animate-pulse duration-1000"></div>
-              
+
               {/* Poster Card with Glossy Sheen */}
               <div className="relative w-[280px] md:w-[320px] p-3.5 bg-[#141414]/90 backdrop-blur-2xl rounded-2xl border border-red-600/40 shadow-[0_40px_80px_rgba(0,0,0,0.95)] overflow-hidden">
-                
                 {/* Dynamic Specular Glare Layer */}
-                <div 
+                <div
                   ref={glareRef}
                   className="absolute inset-[-50%] w-[200%] h-[200%] bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none transform-gpu z-40"
                 ></div>
@@ -285,13 +347,15 @@ const Hero = () => {
           {/* Right Side: Technical Specs & Stack */}
           <div className="hero-anim-item lg:col-span-3 flex flex-col items-start lg:items-end space-y-4 text-left lg:text-right">
             <div className="p-5 bg-black/80 backdrop-blur-2xl border border-white/15 rounded-xl shadow-2xl max-w-xs">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold mb-2">Core Stack & Awards</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold mb-2">
+                Core Stack & Awards
+              </h3>
               <p className="text-xs text-white/80 leading-relaxed font-light">
-                {resume.experience[1].highlights.at(-1)} {resume.certifications[0]}.
+                {resume.experience[1].highlights.at(-1)}{' '}
+                {resume.certifications[0]}.
               </p>
             </div>
           </div>
-
         </div>
 
         {/* Bottom Cinematic Ticker */}
@@ -315,8 +379,10 @@ const Hero = () => {
       {/* --- NETFLIX-THEMED DEVELOPER NAVBAR --- */}
       <header className="absolute top-0 left-0 z-50 w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between pointer-events-auto">
         <div className="text-2xl font-black text-red-600 tracking-tighter flex items-center gap-2 drop-shadow-[0_2px_15px_rgba(229,9,20,0.9)]">
-          {resume.basics.firstName.toUpperCase()}<span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
+          {resume.basics.firstName.toUpperCase()}
+          <span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
         </div>
+
         <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-white/80">
           <a href="#home" className="hover:text-red-500 transition-colors">Home</a>
           <a href="#about" className="hover:text-red-500 transition-colors">About</a>
@@ -325,13 +391,14 @@ const Hero = () => {
           <a href="#projects" className="hover:text-red-500 transition-colors">Projects</a>
           <a href="#contact" className="hover:text-red-500 transition-colors">Contact</a>
         </nav>
+
         <a
-  href={`${import.meta.env.BASE_URL}resume.pdf`}
-  onClick={handleResumeDownload}
-  className="px-5 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.6)] hover:scale-105 active:scale-95"
->
-  Hire Me
-</a>
+          href={`${import.meta.env.BASE_URL}resume.pdf`}
+          onClick={handleResumeDownload}
+          className="px-5 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.6)] hover:scale-105 active:scale-95"
+        >
+          Hire Me
+        </a>
       </header>
     </section>
   );
