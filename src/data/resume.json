@@ -1,0 +1,171 @@
+{
+  "source": "Shivam_Srivastava_Resume(4).pdf",
+  "basics": {
+    "name": "Shivam Srivastava",
+    "firstName": "Shivam",
+    "lastName": "Srivastava",
+    "title": "AI SDET Engineer",
+    "experience": "4+ years",
+    "phone": "+91-8765278662",
+    "email": "shivamsrivastava033@gmail.com",
+    "github": "https://github.com/shivamvns",
+    "linkedin": "https://linkedin.com/in/shiv-sri-vns97"
+  },
+  "summary": "AI SDET Engineer (ISTQB Certified) with 4+ years of experience in test automation, LLM/GenAI testing, and AI agent validation. Specialized in Playwright, TypeScript, Selenium, and Appium for web and mobile automation. Proven expertise evaluating large language models with DeepEval, RAGAS, and LangChain — assessing accuracy, relevance, latency, and hallucination control. Experienced in CI/CD pipeline integration (GitHub Actions, Jenkins), REST API testing, and shift-left testing strategies. Delivered 90–95% bug-free releases, reduced post-release defects by 90%, and led QA strategy for products with 7M+ MAU.",
+  "experience": [
+    {
+      "company": "PHOT.AI",
+      "location": "Gurugram, Haryana",
+      "role": "SDET Lead – AI & Automation",
+      "startDate": "June 2024",
+      "endDate": "Present",
+      "highlights": [
+        "Built an MCP-based Playwright framework integrated with AI agents for autonomous web and API test orchestration, cutting Manual regression time by 60% with zero human intervention.",
+        "Evaluated LLM chatbots and AI agents using DeepEval And RAGAS, measuring accuracy, latency, hallucination rate, and RAG pipeline quality.",
+        "Managed QA for Generative AI photo editing and visual content creation platform, reducing post-release defects by 90%.",
+        "Integrated automation into CI/CD pipelines (GitHub Actions) with shift-left testing and test observability.",
+        "Validated backend services and database operations, contributing to an 80% improvement in API performance.",
+        "Debugged AWS cloud performance issues via log analysis, resolving bottlenecks that reduced average response latency by 30%.",
+        "Led and mentored an 8-member QA team across test planning, task allocation, and quality gates."
+      ]
+    },
+    {
+      "company": "APPYHIGH TECHNOLOGY LLP",
+      "location": "Gurugram, Haryana",
+      "role": "Senior Software QA Engineer",
+      "startDate": "April 2022",
+      "endDate": "May 2024",
+      "highlights": [
+        "Led QA for B2C app launches, driving 5M+ downloads and 4.5+ Play Store ratings.",
+        "Managed QA across 20+ products supporting 1M+ DAU and 7M+ MAU at scale.",
+        "Boosted API defect detection by 25% via Postman & REST API automation; improved release stability by 10%.",
+        "Executed functional, regression & E2E testing, cutting production bugs by 20% with 100% traceability via JIRA.",
+        "Tested GenAI app event tracking via Mixpanel, CleverTap, and GA, ensuring accurate analytics validation.",
+        "Leveraged GenAI tools for test scenario generation, creating 800+ mobile test cases across functional, edge-case, and regression flows, improving test coverage from 40% to 90%.",
+        "Awarded Employee of the Year (2022–23) at AppyHigh Technology."
+      ]
+    }
+  ],
+  "skills": [
+    {"category": "Test Design", "items": ["Test Scenarios", "Root Cause Analysis"]},
+    {"category": "API & Backend Testing", "items": ["Postman", "REST API Testing", "API Automation", "Backend Validation", "Charles Proxy"]},
+    {"category": "Mobile Testing", "items": ["Android", "iOS", "Firebase Crashlytics"]},
+    {"category": "AI / LLM Testing", "items": ["DeepEval", "RAGAS", "LangChain", "Ollama", "Prompt Engineering", "Hallucination Testing", "RAG Testing", "AI Agent Testing"]},
+    {"category": "Automation Framework Design", "items": ["POM", "Hybrid Framework", "Data-Driven Framework", "SOLID Principles"]},
+    {"category": "AI Engineering Tools", "items": ["Claude Code", "GitHub Copilot", "Codex", "Gemini"]},
+    {"category": "Performance Testing", "items": ["JMeter"]},
+    {"category": "QA Methodology", "items": ["Test Planning", "Test Strategy", "Regression Testing", "Agile/Scrum", "SDLC/STLC"]},
+    {"category": "CI/CD & DevOps", "items": ["GitHub Actions", "Jenkins", "AWS", "Shift-left Testing", "Test Observability"]},
+    {"category": "Defect Management", "items": ["Jira"]},
+    {"category": "Test Automation", "items": ["Playwright", "Selenium", "Appium"]},
+    {"category": "Programming", "items": ["TypeScript", "JavaScript", "Node.js"]},
+    {"category": "Databases", "items": ["MySQL", "MongoDB"]}
+  ],
+  "education": [
+    {"institution": "Integral University", "location": "Lucknow, India", "degree": "Master of Computer Applications", "startDate": "2019", "endDate": "2021", "percentage": "83%"},
+    {"institution": "University of Prayagraj", "location": "Prayagraj, India", "degree": "Bachelor of Computer Applications", "startDate": "2015", "endDate": "2018", "percentage": "78%"}
+  ],
+  "projects": [
+    {
+      "name": "AngleLab",
+      "url": "https://www.phot.ai/anglelab",
+      "title": "AI-Powered Marketing Intelligence & Creative Generation Platform",
+      "technologies": ["Playwright", "TypeScript", "LLM Testing", "DeepEval"],
+      "highlights": [
+        "Verified AI-driven ad strategy workflows covering product ingestion, ICP identification, marketing angle and hook generation, reference creatives, and final ad creative generation.",
+        "Evaluated LLM and AI-generated outputs using DeepEval metrics for faithfulness, relevancy, contextual alignment, brand consistency, and prompt adherence.",
+        "Automated critical user journeys using Playwright with TypeScript, covering UI functionality, end-to-end workflows, and regression scenarios."
+      ]
+    },
+    {
+      "name": "VideoLab",
+      "url": "https://www.phot.ai/ai-video",
+      "title": "AI-Powered Video Generation & Creative Automation Platform",
+      "technologies": ["Playwright", "Postman", "E2E Testing", "JIRA", "AI Assisted Testing"],
+      "highlights": [
+        "Spearheaded end-to-end testing of AI video generation workflows, covering storyboard creation, scene sequencing, motion effects, transitions, audio synchronization, and final video rendering.",
+        "Assessed generated videos across multiple aspect ratios, resolutions, and export formats, focusing on frame quality, playback behavior, media synchronization, and output consistency.",
+        "Executed integration, regression, failure-recovery, and production release testing while managing defects end-to-end in JIRA, from identification through verification and closure."
+      ]
+    },
+    {
+      "name": "ListingLab",
+      "url": "https://www.phot.ai/listinglab",
+      "title": "AI-Powered Marketplace Listing Optimization Platform",
+      "technologies": ["Postman", "REST API Testing", "MongoDB", "Database Testing"],
+      "highlights": [
+        "Owned backend-focused testing of AI listing generation workflows, covering product data ingestion, marketplace URL processing, competitor analysis, keyword extraction, and listing content generation.",
+        "Conducted comprehensive REST API and MongoDB testing to ensure request/response accuracy, data persistence, field mappings, database correctness, and end-to-end data integrity.",
+        "Ensured marketplace-specific listing quality by testing AI-generated product content for accuracy, SEO relevance, and platform requirements, while validating end-to-end payment workflows, including subscription purchases, renewals, upgrades, and payment failure scenarios."
+      ]
+    },
+    {
+      "name": "Kyral AI",
+      "title": "AI Art & Video Generation — Android App",
+      "technologies": [
+        "Android",
+        "Generative AI",
+        "Image Generation",
+        "Video Generation"
+      ],
+      "highlights": [
+        "Worked on Kyral AI, an Android app for AI art and video creation.",
+        "The app supports text-to-image generation, photo style transfer, avatars, and text- or image-based video generation."
+      ],
+      "url": "https://play.google.com/store/apps/details?id=ai.photo.painting.art.generator&hl=en_IN"
+    },
+    {
+      "name": "Pixel Go",
+      "title": "AI Photo & Video Enhancement — Android App",
+      "technologies": [
+        "Android",
+        "Photo Enhancement",
+        "Image Restoration",
+        "AI Editing"
+      ],
+      "highlights": [
+        "Worked on Pixel Go, an Android app for AI photo and video enhancement.",
+        "The app includes photo restoration, background removal, object removal, image expansion, and AI headshot generation."
+      ],
+      "url": "https://play.google.com/store/apps/details?id=ai.photo.enhancer.photoeditor&hl=en_IN"
+    },
+    {
+      "name": "Scanner Go",
+      "title": "Document Scanning & PDF Tools — Android App",
+      "technologies": [
+        "Android",
+        "Document Scanning",
+        "PDF Conversion"
+      ],
+      "highlights": [
+        "Worked on Scanner Go, an Android document scanning and PDF application.",
+        "The app supports camera and gallery scanning, document cropping, PDF conversion, compression, and file sharing."
+      ],
+      "url": "https://play.google.com/store/apps/details?id=com.cam.scanner.camscanner.documentscanner&hl=en_IN"
+    },
+    {
+      "name": "Phot.AI",
+      "title": "AI Photo Editing — Android App",
+      "technologies": [
+        "Android",
+        "AI Photo Editing",
+        "Background Removal",
+        "Image Retouching"
+      ],
+      "highlights": [
+        "Worked on the Phot.AI Android app for product photos, marketing visuals, and social media content.",
+        "The app includes background removal and replacement, object removal, retouching, templates, and image resizing."
+      ],
+      "url": "https://play.google.com/store/apps/details?id=phot.ai.photo.editor.studio&hl=en_IN"
+    }
+  ],
+  "certifications": [
+    "ISTQB Certified Tester – Foundation Level (CTFL)",
+    "IBM Data Science Professional Certificate",
+    "Google IT Automation with Python",
+    "Agile with Atlassian Jira",
+    "Test AI & LLM App with DeepEval, RAGAs & more using Ollama",
+    "Build Agentic AI & Multi-Agent System for Software Testing."
+  ],
+  "sourceMetadata": {"trailingDocumentIdentifier": "#HRJ#f47ad6a2-4a7f-4486-809e-20e60970d01d#"}
+}
