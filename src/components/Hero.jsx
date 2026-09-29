@@ -332,7 +332,7 @@ const Hero = () => {
 
                 {/* Netflix Series Tag */}
                 <div className="absolute top-6 left-6 z-30 px-3 py-1 bg-red-600 text-white font-mono text-[10px] font-bold tracking-widest rounded shadow-xl">
-                  FEATURED DEV
+                  FEATURED SDET
                 </div>
 
                 <img
