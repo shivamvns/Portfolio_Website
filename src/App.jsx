@@ -26,7 +26,11 @@ function App() {
       <Expertise />
       <Skills />
       <Projects />
-      <Contact />
+      <Contact
+  contactEmail="shivamsrivastava033@gmail.com"
+  linkedinUrl="https://www.linkedin.com/in/shiv-sri-vns97/"
+  resumeUrl="/resume.pdf"
+/>
       <Footer />
     </main>
   );
