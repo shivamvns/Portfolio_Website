@@ -71,12 +71,12 @@ const Contact = ({ contactEmail = '', linkedinUrl = '', resumeUrl = '' }) => {
 
           <div className="mb-10 inline-flex items-center gap-2 rounded border border-red-600/30 bg-red-600/10 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-red-400 sm:text-xs">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-red-500" />
-            EPISODE 04 // GET IN TOUCH
+            SDET OPPORTUNITIES // CONTACT
           </div>
 
           <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-red-400">Let’s build quality software</p>
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-red-400">Let’s improve software quality</p>
               <h2 id={`${fieldId}-heading`} className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">Have an opportunity?<br /><span className="text-red-500">Let’s connect.</span></h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/75">Looking for an SDET / QA Automation Engineer? Get in touch about job opportunities, testing projects, or collaborations.</p>
 

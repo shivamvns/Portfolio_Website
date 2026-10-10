@@ -232,7 +232,7 @@ const Hero = () => {
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-red-600/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
             <span className="text-red-500 font-bold tracking-wider">
-              NETFLIX DEVELOPER SERIES
+              SDET & QA AUTOMATION
             </span>
             <span className="text-white/40">|</span>
             <span className="text-white/80">{careerDates}</span>
@@ -337,7 +337,7 @@ const Hero = () => {
 
                 <img
                   src={pictureImg}
-                  alt="Developer Portrait"
+                  alt="Shivam Srivastava, SDET"
                   className="w-full h-[330px] md:h-[390px] object-cover rounded-xl filter contrast-125 brightness-105 group-hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>
@@ -348,7 +348,7 @@ const Hero = () => {
           <div className="hero-anim-item lg:col-span-3 flex flex-col items-start lg:items-end space-y-4 text-left lg:text-right">
             <div className="p-5 bg-black/80 backdrop-blur-2xl border border-white/15 rounded-xl shadow-2xl max-w-xs">
               <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold mb-2">
-                Core Stack & Awards
+                Certifications & Awards
               </h3>
               <p className="text-xs text-white/80 leading-relaxed font-light">
                 {resume.experience[1].highlights.at(-1)}{' '}
@@ -360,7 +360,7 @@ const Hero = () => {
 
         {/* Bottom Cinematic Ticker */}
         <div className="hero-anim-item flex items-center justify-between text-xs font-mono text-white/50 tracking-widest uppercase">
-          <span>ENGINEERED FOR SCALABILITY</span>
+          <span>AUTOMATION. QUALITY. CONFIDENCE.</span>
           <span>{resume.basics.phone}</span>
         </div>
       </div>

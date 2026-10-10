@@ -73,14 +73,14 @@ const About = () => {
         <div className="flex flex-col items-start space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-black/80 backdrop-blur-2xl border border-red-600/40 text-xs font-mono uppercase tracking-widest text-white shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-            <span className="text-red-500 font-bold">EPISODE 01</span>
+            <span className="text-red-500 font-bold">PROFILE</span>
             <span className="text-white/40">|</span>
-            <span>ABOUT THE ENGINEER</span>
+            <span>ABOUT THE SDET</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white">
-            EPISODE SYNOPSIS <br />
+            SDET PROFILE <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-600 to-red-700 drop-shadow-[0_0_30px_rgba(229,9,20,0.4)]">
-              ORIGIN & VISION.
+              MY QA JOURNEY.
             </span>
           </h2>
         </div>
@@ -91,7 +91,7 @@ const About = () => {
           {/* Card 1: Bio & Academic Core (Span 7) */}
           <div
             ref={addToRefs}
-            className="md:col-span-7 p-8 md:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between relative group hover:border-red-600/60 transition-all duration-500 overflow-hidden"
+            className="md:col-span-7 min-w-0 break-words p-6 sm:p-8 lg:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between relative group hover:border-red-600/60 transition-all duration-500 overflow-hidden"
           >
             {/* Real-time mouse hover spotlight highlight */}
             <div 
@@ -106,12 +106,15 @@ const About = () => {
             </div>
             
             <div className="space-y-5 relative z-10">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold">Cast & Background</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold">My approach to quality</h3>
               <p className="text-lg md:text-xl font-medium text-white/90 leading-relaxed">
-                I am <span className="text-white font-bold drop-shadow">{resume.basics.name}</span>. {experienceText}.
+                I’m <span className="text-white font-bold drop-shadow">{resume.basics.name}</span>. {resume.about.summary}
               </p>
-              <p className="text-sm md:text-base text-white/60 font-light leading-relaxed">
-                {educationText}.
+              <p className="whitespace-pre-line text-sm md:text-base text-white/75 font-light leading-relaxed">
+                <span className="font-medium text-white/85">Experience:</span> {experienceText}.
+              </p>
+              <p className="whitespace-pre-line text-sm md:text-base text-white/75 font-light leading-relaxed">
+                <span className="font-medium text-white/85">Education:</span> {educationText}.
               </p>
             </div>
             
@@ -125,7 +128,7 @@ const About = () => {
           {/* Card 2: Fellowships & Achievements (Span 5) */}
           <div
             ref={addToRefs}
-            className="md:col-span-5 p-8 md:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between relative group hover:border-red-600/60 transition-all duration-500 overflow-hidden"
+            className="md:col-span-5 min-w-0 break-words p-6 sm:p-8 lg:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between relative group hover:border-red-600/60 transition-all duration-500 overflow-hidden"
           >
             {/* Real-time mouse hover spotlight highlight */}
             <div 
@@ -140,7 +143,7 @@ const About = () => {
             </div>
             
             <div className="space-y-5 relative z-10">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold">Milestones & Accolades</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold">Professional Certifications</h3>
               <ul className="space-y-3.5 text-sm text-white/80 font-light">
                 {resume.certifications.map((certification) => (
                   <li key={certification} className="flex items-start gap-2.5">
@@ -152,14 +155,14 @@ const About = () => {
             </div>
             
             <div className="pt-6 font-mono text-xs text-white/40 relative z-10">
-              // SEASON_01 HIGHLIGHTS
+              // LEARNING & DEVELOPMENT
             </div>
           </div>
 
           {/* Card 3: Technical Ecosystem (Span 12) */}
           <div
             ref={addToRefs}
-            className="md:col-span-12 p-8 md:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 hover:border-red-600/60 transition-all duration-500 overflow-hidden relative group"
+            className="md:col-span-12 min-w-0 break-words p-6 sm:p-8 lg:p-12 bg-[#141414]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl grid grid-cols-1 lg:grid-cols-[minmax(240px,1fr)_2fr] items-start lg:items-center gap-6 hover:border-red-600/60 transition-all duration-500 overflow-hidden relative group"
           >
             {/* Real-time mouse hover spotlight highlight */}
             <div 
@@ -169,13 +172,11 @@ const About = () => {
               }}
             ></div>
 
-            <div className="space-y-2 text-left relative z-10">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-red-500 font-bold">Production Tech Stack</h3>
-              <p className="text-base md:text-lg font-semibold text-white">{resume.basics.title} • {resume.basics.experience}</p>
-            </div>
+            <h3 className="lg:col-span-2 text-xs font-mono uppercase tracking-widest text-red-500 font-bold relative z-10">Tools I work with</h3>
+            <p className="min-w-0 text-base md:text-lg font-semibold text-white relative z-10">{resume.basics.title} • {resume.basics.experience}</p>
             
-            <div className="flex flex-wrap items-center gap-3 relative z-10">
-              {[...skillItems('Test Automation'), ...skillItems('Databases'), ...skillItems('Programming')].map((tech, idx) => (
+            <div className="min-w-0 w-full flex flex-wrap items-center justify-start gap-3 relative z-10">
+              {[...skillItems('Test Automation'), ...skillItems('Databases'), ...skillItems('Programming'), ...skillItems('AI / LLM Testing').filter((tool) => tool === 'DeepEval')].map((tech, idx) => (
                 <span
                   key={idx}
                   className="px-4 py-2 rounded bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-wider text-white shadow-inner hover:bg-red-600/20 hover:border-red-600/40 hover:scale-105 transition-all"

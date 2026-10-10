@@ -12,6 +12,9 @@
     "linkedin": "https://linkedin.com/in/shiv-sri-vns97"
   },
   "summary": "AI SDET Engineer (ISTQB Certified) with 4+ years of experience in test automation, LLM/GenAI testing, and AI agent validation. Specialized in Playwright, TypeScript, Selenium, and Appium for web and mobile automation. Proven expertise evaluating large language models with DeepEval, RAGAS, and LangChain — assessing accuracy, relevance, latency, and hallucination control. Experienced in CI/CD pipeline integration (GitHub Actions, Jenkins), REST API testing, and shift-left testing strategies. Delivered 90–95% bug-free releases, reduced post-release defects by 90%, and led QA strategy for products with 7M+ MAU.",
+  "about": {
+    "summary": "I combine manual testing, automation, and AI evaluation to validate user journeys, backend data, and generated outputs."
+  },
   "experience": [
     {
       "company": "PHOT.AI",
@@ -47,19 +50,19 @@
     }
   ],
   "skills": [
-    {"category": "Test Design", "items": ["Test Scenarios", "Root Cause Analysis"]},
-    {"category": "API & Backend Testing", "items": ["Postman", "REST API Testing", "API Automation", "Backend Validation", "Charles Proxy"]},
-    {"category": "Mobile Testing", "items": ["Android", "iOS", "Firebase Crashlytics"]},
-    {"category": "AI / LLM Testing", "items": ["DeepEval", "RAGAS", "LangChain", "Ollama", "Prompt Engineering", "Hallucination Testing", "RAG Testing", "AI Agent Testing"]},
-    {"category": "Automation Framework Design", "items": ["POM", "Hybrid Framework", "Data-Driven Framework", "SOLID Principles"]},
-    {"category": "AI Engineering Tools", "items": ["Claude Code", "GitHub Copilot", "Codex", "Gemini"]},
-    {"category": "Performance Testing", "items": ["JMeter"]},
-    {"category": "QA Methodology", "items": ["Test Planning", "Test Strategy", "Regression Testing", "Agile/Scrum", "SDLC/STLC"]},
-    {"category": "CI/CD & DevOps", "items": ["GitHub Actions", "Jenkins", "AWS", "Shift-left Testing", "Test Observability"]},
-    {"category": "Defect Management", "items": ["Jira"]},
-    {"category": "Test Automation", "items": ["Playwright", "Selenium", "Appium"]},
-    {"category": "Programming", "items": ["TypeScript", "JavaScript", "Node.js"]},
-    {"category": "Databases", "items": ["MySQL", "MongoDB"]}
+    {"category": "Test Design", "description": "Define scenarios and edge cases, then investigate failures to identify their causes.", "items": ["Test Scenarios", "Root Cause Analysis"]},
+    {"category": "API & Backend Testing", "description": "Validate service responses, backend workflows, and data integrity across integrations.", "items": ["Postman", "REST API Testing", "API Automation", "Backend Validation", "Charles Proxy"]},
+    {"category": "Mobile Testing", "description": "Check app behavior on mobile platforms and investigate crashes affecting user journeys.", "items": ["Android", "iOS", "Firebase Crashlytics"]},
+    {"category": "AI / LLM Testing", "description": "Evaluate generated responses for relevance, accuracy, hallucinations, and retrieval quality.", "items": ["DeepEval", "RAGAS", "LangChain", "Ollama", "Prompt Engineering", "Hallucination Testing", "RAG Testing", "AI Agent Testing"]},
+    {"category": "Automation Framework Design", "description": "Organize reusable test components and data to keep automated suites maintainable.", "items": ["POM", "Hybrid Framework", "Data-Driven Framework", "SOLID Principles"]},
+    {"category": "AI Engineering Tools", "description": "Use AI assistance to draft test scenarios and support automation development.", "items": ["Claude Code", "GitHub Copilot", "Codex", "Gemini"]},
+    {"category": "Performance Testing", "description": "Assess response times under load and investigate performance bottlenecks.", "items": ["JMeter"]},
+    {"category": "QA Methodology", "description": "Plan coverage and regression checks throughout development and release cycles.", "items": ["Test Planning", "Test Strategy", "Regression Testing", "Agile/Scrum", "SDLC/STLC"]},
+    {"category": "CI/CD & DevOps", "description": "Run automated checks in delivery pipelines and use results to guide release quality.", "items": ["GitHub Actions", "Jenkins", "AWS", "Shift-left Testing", "Test Observability"]},
+    {"category": "Defect Management", "description": "Track issues from discovery through reproduction, verification, and closure.", "items": ["Jira"]},
+    {"category": "Test Automation", "description": "Automate critical web and mobile journeys for repeatable regression coverage.", "items": ["Playwright", "Selenium", "Appium"]},
+    {"category": "Programming", "description": "Write test scripts and supporting logic for automated workflows and assertions.", "items": ["TypeScript", "JavaScript", "Node.js"]},
+    {"category": "Databases", "description": "Verify stored records and data consistency behind application workflows.", "items": ["MySQL", "MongoDB"]}
   ],
   "education": [
     {"institution": "Integral University", "location": "Lucknow, India", "degree": "Master of Computer Applications", "startDate": "2019", "endDate": "2021", "percentage": "83%"},
@@ -109,8 +112,8 @@
         "Video Generation"
       ],
       "highlights": [
-        "Worked on Kyral AI, an Android app for AI art and video creation.",
-        "The app supports text-to-image generation, photo style transfer, avatars, and text- or image-based video generation."
+        "Tested AI art and video generation from text and image inputs.",
+        "Checked prompt alignment, style transfer, avatars, and generated media quality."
       ],
       "url": "https://play.google.com/store/apps/details?id=ai.photo.painting.art.generator&hl=en_IN"
     },
@@ -124,8 +127,8 @@
         "AI Editing"
       ],
       "highlights": [
-        "Worked on Pixel Go, an Android app for AI photo and video enhancement.",
-        "The app includes photo restoration, background removal, object removal, image expansion, and AI headshot generation."
+        "Tested AI photo enhancement and restoration for output quality and detail preservation.",
+        "Covered background and object removal, image expansion, and headshot generation."
       ],
       "url": "https://play.google.com/store/apps/details?id=ai.photo.enhancer.photoeditor&hl=en_IN"
     },
@@ -138,8 +141,8 @@
         "PDF Conversion"
       ],
       "highlights": [
-        "Worked on Scanner Go, an Android document scanning and PDF application.",
-        "The app supports camera and gallery scanning, document cropping, PDF conversion, compression, and file sharing."
+        "Tested camera and gallery scanning, document cropping, and PDF conversion.",
+        "Checked document readability, compression quality, and file sharing."
       ],
       "url": "https://play.google.com/store/apps/details?id=com.cam.scanner.camscanner.documentscanner&hl=en_IN"
     },
@@ -147,14 +150,14 @@
       "name": "Phot.AI",
       "title": "AI Photo Editing — Android App",
       "technologies": [
-        "Android",
+        "iOS",
         "AI Photo Editing",
         "Background Removal",
         "Image Retouching"
       ],
       "highlights": [
-        "Worked on the Phot.AI Android app for product photos, marketing visuals, and social media content.",
-        "The app includes background removal and replacement, object removal, retouching, templates, and image resizing."
+        "Tested AI photo editing for product images, marketing visuals, and social content.",
+        "Checked background changes, object removal, retouching, templates, and resizing."
       ],
       "url": "https://play.google.com/store/apps/details?id=phot.ai.photo.editor.studio&hl=en_IN"
     }

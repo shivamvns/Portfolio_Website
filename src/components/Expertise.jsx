@@ -75,14 +75,14 @@ const Expertise = () => {
           <div className="space-y-3 max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/80 backdrop-blur-xl border border-red-600/40 text-[11px] font-mono uppercase tracking-widest text-white shadow-xl">
               <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
-              <span className="text-red-500 font-bold">EPISODE 02</span>
+              <span className="text-red-500 font-bold">EXPERTISE</span>
               <span className="text-white/40">|</span>
               <span>CORE COMPETENCIES</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
-              DIRECTOR'S CUT <br />
+              SDET EXPERTISE <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-600 to-red-700 drop-shadow-[0_0_25px_rgba(229,9,20,0.35)]">
-                TECHNICAL CAPABILITIES.
+                TESTING & AUTOMATION.
               </span>
             </h2>
           </div>

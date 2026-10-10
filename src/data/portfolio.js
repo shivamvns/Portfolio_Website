@@ -15,19 +15,18 @@ export const educationText = resume.education
     (item) =>
       `${item.degree}, ${item.institution} (${item.startDate}–${item.endDate}), ${item.percentage}`
   )
-  .join(' • ');
+  .join('\n');
 
 export const experienceText = resume.experience
   .map(
     (item) =>
       `${item.role} at ${item.company} (${item.startDate} – ${item.endDate})`
   )
-  .join(' • ');
+  .join('\n');
 
 export const skillCategories = resume.skills.map((item) => ({
   title: item.category,
-  desc: item.items.join(' • '),
-  tag: item.category,
+  desc: item.description,
   skills: item.items,
 }));
 
@@ -36,7 +35,7 @@ export const projectsData = resume.projects.map((item, index) => ({
   category: item.title,
   description: item.highlights.join(' '),
   tags: item.technologies,
-  episode: `S01 E${String(index + 1).padStart(2, '0')}`,
+  episode: `PROJECT ${String(index + 1).padStart(2, '0')}`,
   url: item.url ?? item.playStoreUrl ?? null,
   playStoreUrl: item.playStoreUrl ?? null,
 }));

@@ -13,7 +13,7 @@ const Footer = () => {
               {resume.basics.firstName.toUpperCase()}<span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
             </div>
             <p className="text-xs font-mono text-white/50 tracking-widest uppercase">
-              // NETFLIX DEVELOPER SERIES &bull; {careerDates}
+              // SDET & QA AUTOMATION &bull; {careerDates}
             </p>
           </div>
 
@@ -65,7 +65,7 @@ const Footer = () => {
         {/* Bottom Copyright & Cinematic Tagline */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-white/5 text-[11px] font-mono text-white/40 uppercase tracking-widest">
           <p>&copy; {new Date().getFullYear()} {resume.basics.name}. All Rights Reserved.</p>
-          <p className="text-red-500/80">STREAMING WORLDWIDE &bull; BUILT WITH REACT & GSAP</p>
+          <p className="text-red-500/80">TEST AUTOMATION &bull; API & AI QUALITY</p>
         </div>
 
       </div>

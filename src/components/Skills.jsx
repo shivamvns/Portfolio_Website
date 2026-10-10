@@ -14,7 +14,7 @@ const Skills = () => {
   const textRefs = useRef([]);
 
   const handleScroll = (e) => {
-    if (window.innerWidth >= 769) return;
+    if (window.innerWidth >= 768) return;
     const container = e.target;
     const center = container.scrollLeft + container.offsetWidth / 2;
     
@@ -50,7 +50,7 @@ const Skills = () => {
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
 
-      mm.add("(min-width: 769px)", () => {
+      mm.add("(min-width: 768px)", () => {
         const updateCards = (p) => {
           cardsRef.current.forEach((card, i) => {
             if (!card) return;
@@ -110,7 +110,7 @@ const Skills = () => {
         });
       });
 
-      mm.add("(max-width: 768px)", () => {
+      mm.add("(max-width: 767px)", () => {
         cardsRef.current.forEach((card, i) => {
            if (card) {
              gsap.set(card, { clearProps: "x,y,z,rotation,scale,opacity,position" });
@@ -136,7 +136,7 @@ const Skills = () => {
     <section 
       id="skills"
       ref={sectionRef} 
-      className="relative w-full h-screen bg-[#0b0b0b] text-white overflow-hidden flex items-center justify-center md:[perspective:1000px] select-none"
+      className="relative w-full min-h-screen md:h-screen md:min-h-[720px] py-16 md:py-0 bg-[#0b0b0b] text-white overflow-hidden flex items-center justify-center md:[perspective:1000px] select-none"
     >
       {/* Dynamic Netflix Dark Background Vignettes */}
       {skillCategories.map((_, i) => (
@@ -173,24 +173,24 @@ const Skills = () => {
           <div 
             key={i}
             ref={el => cardsRef.current[i] = el}
-            className="md:absolute relative shrink-0 snap-center w-[82vw] sm:w-[360px] md:w-[440px] h-[460px] md:h-[540px] rounded-[32px] p-8 md:p-10 bg-[#141414]/95 backdrop-blur-2xl border border-white/15 flex flex-col justify-between overflow-hidden group shadow-[0_30px_60px_rgba(0,0,0,0.9)] hover:border-red-600/80 transition-colors duration-500"
+            className="md:absolute relative shrink-0 snap-center w-[82vw] sm:w-[360px] md:w-[440px] min-h-[460px] md:min-h-[540px] h-auto rounded-[32px] p-6 sm:p-8 md:p-10 bg-[#141414]/95 backdrop-blur-2xl border border-white/15 flex flex-col justify-between gap-6 overflow-hidden group shadow-[0_30px_60px_rgba(0,0,0,0.9)] hover:border-red-600/80 transition-colors duration-500"
           >
             {/* Inner Red Glossy Reflection */}
             <div className="absolute inset-0 bg-gradient-to-tr from-red-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20" />
             
             {/* Top Card Metadata */}
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex items-center justify-between gap-3 relative z-10">
               <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-red-500 bg-red-600/10 px-3 py-1 rounded border border-red-600/20">
-                {category.tag}
+                QA SKILL
               </span>
-              <span className="text-xs font-mono text-white/40">
-                [ 0{i + 1} / 06 ]
+              <span className="shrink-0 text-xs font-mono text-white/40">
+                [ {String(i + 1).padStart(2, '0')} / {String(skillCategories.length).padStart(2, '0')} ]
               </span>
             </div>
 
             {/* Middle Title & Description */}
             <div className="space-y-4 relative z-10 my-auto">
-              <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight group-hover:text-red-500 transition-colors duration-300">
+              <h3 className="break-words text-3xl md:text-4xl font-black text-white tracking-tight group-hover:text-red-500 transition-colors duration-300">
                 {category.title}
               </h3>
               <p className="text-sm md:text-base text-white/70 font-light leading-relaxed">
@@ -203,7 +203,7 @@ const Skills = () => {
               {category.skills.map((skill, sIdx) => (
                 <span 
                   key={sIdx}
-                  className="text-xs font-mono text-white/80 bg-white/5 border border-white/10 px-3 py-1 rounded group-hover:border-red-600/30 transition-colors"
+                  className="max-w-full break-words text-xs font-mono text-white/80 bg-white/5 border border-white/10 px-3 py-1 rounded group-hover:border-red-600/30 transition-colors"
                 >
                   {skill}
                 </span>

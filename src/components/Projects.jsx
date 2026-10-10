@@ -1,5 +1,5 @@
 import { projectsData } from '../data/portfolio';
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -10,11 +10,13 @@ const Projects = () => {
   const folderBackRef = useRef(null);
   const folderFrontRef = useRef(null);
   const cardsRef = useRef([]);
+  const surfacesRef = useRef([]);
   const mobileCardsRef = useRef([]);
   const mobileCarouselRef = useRef(null);
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
+  useLayoutEffect(() => {
+    const mm = gsap.matchMedia();
+    const ctx = gsap.context(() => {
       // Set initial origins (Centered in viewport)
       gsap.set([folderBackRef.current, folderFrontRef.current], {
         xPercent: -50,
@@ -45,63 +47,86 @@ const Projects = () => {
         return { row, col };
       };
 
-      cardsRef.current.forEach((card) => {
-        gsap.set(card, {
-          xPercent: -50,
-          yPercent: -50,
-          rotation: gsap.utils.random(-6, 6),
-          scale: 0.85,
-          x: 0,
-          y: 0
-        });
-      });
-
-      let mm = gsap.matchMedia();
-
       mm.add(
         {
-          isDesktop: "(min-width: 768px)",
-          isMobile: "(max-width: 767px)"
+          isDesktop: "(min-width: 1024px)",
+          isMobile: "(max-width: 1023px)"
         },
         (context) => {
-          let { isDesktop, isMobile } = context.conditions;
+          const { isDesktop, isMobile } = context.conditions;
+          let tl;
+          // Create the idle loop once per desktop breakpoint, inside the context.
+          // The outer links handle entrance/reverse; only their surfaces float.
+          const floatTween = isDesktop ? gsap.to(surfacesRef.current, {
+            y: 12,
+            duration: 3.5,
+            yoyo: true,
+            repeat: -1,
+            paused: true,
+            ease: "sine.inOut",
+            force3D: false,
+            stagger: { amount: 1.5, from: "start" }
+          }) : null;
+          const pauseFloating = () => floatTween?.pause();
+          const updateSectionHeight = () => {
+            const cards = isDesktop ? cardsRef.current : mobileCardsRef.current;
+            const surfaces = cards.map((card) => card.firstElementChild);
+            const section = containerRef.current;
+            // Measure natural content at the current width before sharing sizes.
+            section.style.setProperty('--project-card-height', 'auto');
+            section.style.setProperty('--project-footer-height', '0px');
+            const blocks = surfaces.map((surface) =>
+              [...surface.children].filter((child) => getComputedStyle(child).position !== 'absolute')
+            );
+            const blockHeights = [0, 1, 2].map((index) =>
+              Math.max(...blocks.map((children) => children[index].offsetHeight))
+            );
+            const styles = getComputedStyle(surfaces[0]);
+            const spacing = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom)
+              + parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth)
+              + parseFloat(styles.rowGap) * 2;
+            const tallestCard = Math.ceil(Math.max(300, spacing + blockHeights.reduce((sum, height) => sum + height, 0)));
+            section.style.setProperty('--project-footer-height', `${blockHeights[2]}px`);
+            section.style.setProperty('--project-card-height', `${tallestCard}px`);
+            gsap.set(containerRef.current, {
+              minHeight: isDesktop ? tallestCard * 3 + 400 : Math.max(window.innerHeight, tallestCard + 192)
+            });
+          };
+          updateSectionHeight();
 
           if (isDesktop) {
-            let floatTween;
+            gsap.set(cardsRef.current, {
+              xPercent: -50,
+              yPercent: -50,
+              rotation: 0,
+              scale: 0.85,
+              x: 0,
+              y: 0,
+              force3D: false
+            });
 
-            const tl = gsap.timeline({
+            tl = gsap.timeline({
               scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top 50%",
                 end: "bottom 50%",
                 toggleActions: "play reverse play reverse",
-                onEnter: () => {
-                  if (floatTween) floatTween.kill();
+                invalidateOnRefresh: true,
+                onRefreshInit: updateSectionHeight,
+                onRefresh: (self) => {
+                  if (self.isActive && tl?.progress() === 1) floatTween.resume();
+                  else pauseFloating();
                 },
-                onEnterBack: () => {
-                  if (floatTween) floatTween.kill();
-                },
-                onLeave: () => {
-                  if (floatTween) floatTween.kill();
-                },
-                onLeaveBack: () => {
-                  if (floatTween) floatTween.kill();
-                }
+                onEnter: pauseFloating,
+                onEnterBack: pauseFloating,
+                onLeave: pauseFloating,
+                onLeaveBack: pauseFloating
               },
+              onStart: pauseFloating,
               onComplete: () => {
-                floatTween = gsap.to(cardsRef.current, {
-                  y: "+=12",
-                  rotation: "+=1",
-                  duration: 3.5,
-                  yoyo: true,
-                  repeat: -1,
-                  ease: "sine.inOut",
-                  stagger: {
-                    amount: 1.5,
-                    from: "random"
-                  }
-                });
-              }
+                if (tl.scrollTrigger.isActive) floatTween.resume();
+              },
+              onReverseComplete: () => floatTween.pause(0)
             });
 
             // 1. Folder opens with smooth rotation
@@ -155,7 +180,7 @@ const Projects = () => {
 
                   return (row - 1) * (h + gap);
                 },
-                rotation: () => gsap.utils.random(-3, 3),
+                rotation: 0,
                 scale: 1,
                 duration: 1.4,
                 stagger: {
@@ -178,14 +203,16 @@ const Projects = () => {
                 y: 0,
                 scale: 0.4,
                 opacity: 0,
-                rotation: gsap.utils.random(-15, 15)
+                rotation: 0,
+                force3D: false
               });
             });
 
-            const tl = gsap.timeline({
+            tl = gsap.timeline({
               scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 60%"
+                start: "top 60%",
+                onRefreshInit: updateSectionHeight
               }
             });
 
@@ -214,38 +241,51 @@ const Projects = () => {
                 x: 0,
                 y: 0,
                 rotation: 0,
-                scale: (i) => (i === 0 ? 1 : 0.92),
-                opacity: (i) => (i === 0 ? 1 : 0.5),
+                scale: 1,
+                opacity: 1,
                 duration: 0.8,
                 stagger: 0.08,
-                ease: "expo.out",
-                onComplete: () => {
-                  if (mobileCarouselRef.current) {
-                    mobileCarouselRef.current.style.overflowX = 'auto';
-                    mobileCarouselRef.current.style.pointerEvents = 'auto';
-                  }
-                }
+                ease: "expo.out"
               },
               "-=0.2"
             );
+            tl.set(mobileCarouselRef.current, {
+              overflowX: 'auto',
+              pointerEvents: 'auto'
+            });
           }
+          let disposed = false;
+          document.fonts.ready.then(() => {
+            if (!disposed) ScrollTrigger.refresh();
+          });
+          return () => {
+            disposed = true;
+            floatTween?.kill();
+            tl?.scrollTrigger?.kill();
+            tl?.kill();
+            containerRef.current.style.removeProperty('--project-card-height');
+            containerRef.current.style.removeProperty('--project-footer-height');
+          };
         }
       );
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, []);
 
   return (
     <section
       id="projects"
       ref={containerRef}
-      className="bg-[#0b0b0b] min-h-[100svh] md:min-h-[170vh] relative font-sans overflow-x-clip text-white w-full flex items-center justify-center py-24 md:py-40 select-none"
+      className="bg-[#0b0b0b] min-h-[100svh] lg:min-h-[170vh] relative font-sans overflow-x-clip text-white w-full flex items-center justify-center py-24 lg:py-40 select-none"
     >
       {/* Background Netflix Cinematic Title Watermark */}
       <div className="absolute top-10 left-0 w-full flex items-start justify-center pointer-events-none z-0">
         <h1 className="text-[14vw] sm:text-[17vw] md:text-[20vw] font-black text-white/[0.03] tracking-tighter leading-none whitespace-nowrap uppercase">
-          ORIGINALS
+          PROJECTS
         </h1>
       </div>
 
@@ -265,7 +305,7 @@ const Projects = () => {
             <div className="absolute -top-6 left-6 w-32 h-8 bg-[#1f1f1f] rounded-t-xl border-t border-red-600/30" />
 
             <div className="relative z-10 text-red-600 font-mono font-black text-2xl tracking-widest uppercase opacity-60">
-              ARCHIVE_SLOTS
+              QA PROJECTS
             </div>
           </div>
 
@@ -280,12 +320,15 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open ${project.title} in a new tab`}
-              className="hidden md:block absolute w-[80vw] md:w-[33vw] max-w-[380px] aspect-[16/10] will-change-transform"
+              className="hidden lg:block absolute box-border w-[calc((100vw-160px)/3)] max-w-[380px] h-[var(--project-card-height,auto)] min-h-[300px]"
               style={{ zIndex: 10 + i }}
             >
-              <div className="w-full h-full rounded-[24px] overflow-hidden border border-white/15 bg-[#141414]/95 backdrop-blur-2xl shadow-[0_25px_50px_rgba(0,0,0,0.9)] transition-all duration-500 group hover:scale-[1.04] hover:border-red-600 hover:shadow-[0_35px_80px_rgba(229,9,20,0.35)] hover:-translate-y-2 cursor-pointer relative z-10 p-7 flex flex-col justify-between">
+              <div
+                ref={(el) => { surfacesRef.current[i] = el; }}
+                className="box-border w-full h-full min-h-[300px] rounded-[24px] overflow-hidden border border-white/15 bg-[#141414] shadow-[0_25px_50px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 group hover:border-red-600 hover:shadow-[0_35px_80px_rgba(229,9,20,0.35)] cursor-pointer relative z-10 p-6 lg:p-7 flex flex-col gap-4 break-words"
+              >
                 {/* Top Card Header */}
-                <div className="flex items-center justify-between">
+                <div className="shrink-0 flex flex-wrap items-center justify-between gap-2">
                   <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-red-500 bg-red-600/10 px-2.5 py-1 rounded border border-red-600/20">
                     {project.episode}
                   </span>
@@ -296,13 +339,13 @@ const Projects = () => {
                     </span>
 
                     <span className="text-[10px] font-mono border border-white/30 px-1 text-white/70">
-                      HD
+                      QA
                     </span>
                   </div>
                 </div>
 
                 {/* Middle Title & Description */}
-                <div className="space-y-2 my-auto">
+                <div className="shrink-0 space-y-2">
                   <div className="text-[11px] font-mono uppercase tracking-widest text-white/40">
                     {project.category}
                   </div>
@@ -311,17 +354,17 @@ const Projects = () => {
                     {project.title}
                   </h3>
 
-                  <p className="text-xs text-white/70 font-light leading-relaxed line-clamp-2">
+                  <p className="text-xs text-white/70 font-light leading-relaxed">
                     {project.description}
                   </p>
                 </div>
 
                 {/* Bottom Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                <div className="shrink-0 mt-auto min-h-[var(--project-footer-height,0px)] flex flex-wrap items-start content-start gap-1.5 pt-3 border-t border-white/10">
                   {project.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="text-[10px] font-mono text-white/70 bg-white/5 px-2 py-0.5 rounded group-hover:border-red-600/30 transition-colors"
+                      className="max-w-full break-words text-[10px] font-mono text-white/70 bg-white/5 px-2 py-0.5 rounded group-hover:border-red-600/30 transition-colors"
                     >
                       {tag}
                     </span>
@@ -329,7 +372,7 @@ const Projects = () => {
                 </div>
 
                 {/* Red Glowing Corner Accent */}
-                <div className="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-red-600 group-hover:shadow-[0_0_15px_#E50914] transition-all" />
+                <div className="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-red-600 group-hover:shadow-[0_0_15px_#E50914] transition-shadow" />
               </div>
             </a>
           ))}
@@ -350,7 +393,7 @@ const Projects = () => {
       {/* Mobile Swipeable Carousel */}
       <div
         ref={mobileCarouselRef}
-        className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-auto py-12 flex items-center gap-6 px-[12.5vw] pointer-events-none z-[100] snap-x snap-mandatory overflow-x-hidden hide-scrollbar"
+        className="lg:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-auto py-12 flex items-center gap-6 px-[12.5vw] pointer-events-none z-[100] snap-x snap-mandatory overflow-x-hidden hide-scrollbar"
       >
         <style>{`
           .hide-scrollbar::-webkit-scrollbar {
@@ -373,10 +416,10 @@ const Projects = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open ${project.title} in a new tab`}
-            className="shrink-0 w-[78vw] aspect-[16/11] snap-center will-change-transform relative z-10"
+            className="box-border shrink-0 w-[78vw] sm:w-[380px] h-[var(--project-card-height,auto)] min-h-[300px] snap-center relative z-10"
           >
-            <div className="w-full h-full rounded-[24px] overflow-hidden border border-white/15 bg-[#141414] p-6 flex flex-col justify-between shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
-              <div className="flex items-center justify-between">
+            <div className="box-border w-full h-full min-h-[300px] rounded-[24px] overflow-hidden border border-white/15 bg-[#141414] p-6 lg:p-7 flex flex-col gap-4 break-words shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+              <div className="shrink-0 flex flex-wrap items-center justify-between gap-2">
                 <span className="text-[10px] font-mono font-bold tracking-widest text-red-500 bg-red-600/10 px-2 py-0.5 rounded">
                   {project.episode}
                 </span>
@@ -386,21 +429,21 @@ const Projects = () => {
                 </span>
               </div>
 
-              <div className="space-y-2">
+              <div className="shrink-0 space-y-2">
                 <h3 className="text-xl font-black text-white">
                   {project.title}
                 </h3>
 
-                <p className="text-xs text-white/70 font-light line-clamp-2">
+                <p className="text-xs text-white/70 font-light leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-1 pt-2 border-t border-white/10">
+              <div className="shrink-0 mt-auto min-h-[var(--project-footer-height,0px)] flex flex-wrap items-start content-start gap-1 pt-2 border-t border-white/10">
                 {project.tags.slice(0, 3).map((tag, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[10px] font-mono text-white/60 bg-white/5 px-2 py-0.5 rounded"
+                    className="max-w-full break-words text-[10px] font-mono text-white/60 bg-white/5 px-2 py-0.5 rounded"
                   >
                     {tag}
                   </span>
